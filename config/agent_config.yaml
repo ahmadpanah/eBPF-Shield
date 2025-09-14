@@ -1,0 +1,23 @@
+agent:
+  poll_interval_seconds: 5
+  container_discovery_interval_seconds: 30
+
+# Parameters for the adaptive baseliner
+baseliner:
+  ewma_alpha: 0.3 # Smoothing factor for EWMA
+
+# Parameters for the health scorer
+health_scorer:
+  z_score_threshold: 3.5 # Deviations beyond this are significant
+  decay_steepness: 1.5   # Controls the steepness of the health drop
+
+  # Weights for the composite health score (must sum to 1.0)
+  metric_weights:
+    net_latency: 0.4
+    net_errors: 0.3
+    cpu_latency: 0.2
+    mem_faults: 0.1
+
+# Parameters for the in-kernel remediator
+remediator:
+  aggression_factor: 1.5 # Gamma (γ) in the drop probability function
